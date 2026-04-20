@@ -9,25 +9,25 @@ The firmware is built using the official **ESP-IDF** (Espressif IoT Development 
 ```mermaid
 flowchart LR
     subgraph ESP32 Sensor Node
-        I2C[I2C Driver\nRead Pressure/Temp]
-        Task[FreeRTOS Task\nData Processing]
-        HCI[BLE Host & Controller\nNimBLE Stack]
-        I2C -->|Raw Data| Task
-        Task -->|Payload Struct| HCI
+        I2C["I2C Driver\nRead Pressure/Temp"]
+        Task["FreeRTOS Task\nData Processing"]
+        HCI["BLE Host & Controller\nNimBLE Stack"]
+        I2C -->|"Raw Data"| Task
+        Task -->|"Payload Struct"| HCI
     end
 
     subgraph Peripherals
-        Sensor[Pressure/Temp Sensor\n(e.g., BMP280)]
-        Sensor <-->|SDA/SCL| I2C
+        Sensor["Pressure/Temp Sensor\n(e.g., BMP280)"]
+        Sensor <-->|"SDA/SCL"| I2C
     end
     
-    subgraph Mobile Clients (Central)
-        App1[Phone App 1]
-        App2[Phone App 2]
+    subgraph Mobile Clients Central
+        App1["Phone App 1"]
+        App2["Phone App 2"]
     end
 
-    HCI -.->|BLE Advertisement\n(Non-Connectable)| App1
-    HCI -.->|BLE Advertisement\n(Non-Connectable)| App2
+    HCI -.->|"BLE Advertisement\n(Non-Connectable)"| App1
+    HCI -.->|"BLE Advertisement\n(Non-Connectable)"| App2
 ```
 
 ## Features
